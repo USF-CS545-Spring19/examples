@@ -62,8 +62,112 @@ public class SortingAlgorithms {
 
         }
     }
-    
-    /** Print a given array of integers */
+
+
+    /**
+     * Sort a given array using shell sort and n/2, n/4, n/8 etc increments. The
+     * code is modified from the code of Prof. Galles.
+     */
+    public static void shellSort(int[] arr) {
+        int n = arr.length;
+        int increment, offset;
+        for (increment = n / 2; increment > 0; increment = increment / 2)
+            for (offset = 0; offset < increment; offset++)
+                insertionSort(arr, offset, increment);
+    }
+
+    /**
+     * Another version of the insertion sort that sorts a sublist of a given
+     * list. Used in Shell Sort. Takes an offset (the first element of the list
+     * will be at arr[offset]) and increment (the gap between the elements of
+     * the list)
+     */
+    public static void insertionSort(int[] arr, int offset, int increment) {
+        int i, j;
+        int n = arr.length;
+        for (i = offset + increment; i < n; i = i + increment) {
+            int curr = arr[i];
+            j = i - increment;
+            while (j >= 0 && arr[j] > curr) {
+                arr[j + increment] = arr[j];
+                j = j - increment;
+            }
+            arr[j + increment] = curr;
+        }
+    }
+
+    /** public method for mergeSort - called from outside of the class
+     *
+     * @param arr input array of integers
+     */
+    public static void mergeSort(int[] arr) {
+        int[] temp = new int[arr.length];
+        mergeSort(arr, temp, 0, arr.length - 1);
+    }
+
+    /**
+     * A private mergeSort method - takes an array, a temporary array, and the
+     * indices that specify what part of the list we are working with (we need
+     * to sort the part from low to high)
+     *
+     * @param arr array of integers
+     * @param temp temporary array used in the algorithm for merging
+     * @param low index of the first element of the part of the array we need to sort
+     * @param high index of the last element of the part of the array we need to sort
+     */
+    private static void mergeSort(int[] arr, int[] temp, int low, int high) {
+        if (low >= high)
+            return;
+        // divide in half
+        int mid = (low + high) / 2;
+        mergeSort(arr, temp, low, mid);
+        mergeSort(arr, temp, mid + 1, high);
+        merge(arr, temp, low, mid, high); // merge two sorted halves into one
+        // sorted list
+    }
+
+    /**
+     * Merge two sorted sublists together, one that goes from low to mid another
+     * goes from mid+1 to high. Uses a temporary array.
+     *
+     * @param arr array of integers
+     * @param temp temporary array
+     * @param low start index in sub-array 1
+     * @param mid  end index in sub-array 1
+     * @param high end index in sub-array 2
+     */
+    public static void merge(int[] arr, int[] temp, int low, int mid, int high) {
+        int k = low;
+        int i = low;
+        int j = mid + 1;
+        while (k <= high) {
+            if (i > mid) {// ran out of elements in the i sublist
+                temp[k] = arr[j];
+                k++;
+                j++;
+            } else if (j > high) {// ran out of elements in the j sublist
+                temp[k] = arr[i];
+                k++;
+                i++;
+            } else if (arr[i] < arr[j]) { // place arr[i] in temp, move i
+                temp[k] = arr[i];
+                k++;
+                i++;
+            } else {
+                temp[k] = arr[j]; // place arr[j] in temp, move j
+                k++;
+                j++;
+            }
+        }
+        // copy the result from temp back to arr
+        for (k = low; k <= high; k++)
+            arr[k] = temp[k];
+    }
+
+    /** Print a given array of integers
+     *
+     * @param arr array of integers to print
+     */
     public static void print(int[] arr) {
         for (int elem : arr)
             System.out.print(elem + " ");
