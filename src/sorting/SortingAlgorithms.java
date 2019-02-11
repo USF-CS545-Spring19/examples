@@ -40,6 +40,7 @@ public class SortingAlgorithms {
                     arr[j - 1] = tmp;
                 }
             }
+            print(arr);
         }
 
     }
@@ -59,7 +60,6 @@ public class SortingAlgorithms {
                 j--;
             }
             arr[j + 1] = curr;
-
         }
     }
 
@@ -122,8 +122,10 @@ public class SortingAlgorithms {
         int mid = (low + high) / 2;
         mergeSort(arr, temp, low, mid);
         mergeSort(arr, temp, mid + 1, high);
+
         merge(arr, temp, low, mid, high); // merge two sorted halves into one
         // sorted list
+
     }
 
     /**
@@ -162,6 +164,56 @@ public class SortingAlgorithms {
         // copy the result from temp back to arr
         for (k = low; k <= high; k++)
             arr[k] = temp[k];
+    }
+
+
+    /**
+     * Quick sort - public method
+     * @param arr input array if integers
+     */
+    public static void quickSort(int arr[]) {
+        quickSort(arr, 0, arr.length - 1);
+    }
+
+    /**
+     * Quick sort implementation. Uses partition as a helper method.
+     * @param arr array of integers
+     * @param low index of the first element of the sub-array to sort
+     * @param high index of the last element of the sub-array to sort
+     */
+    private static void quickSort(int arr[], int low, int high) {
+        int indexOfPivot;
+        if (low <= high) {
+            indexOfPivot = partition(arr, low, high); // the index of pivot element
+            quickSort(arr, low, indexOfPivot - 1);
+            quickSort(arr, indexOfPivot + 1, high);
+        }
+    }
+
+    static int partition(int arr[], int low, int high) {
+        int pivot;
+        int tmp;
+        int max = high;
+        int mid = (low + high) / 2;
+
+        tmp = arr[mid];
+        arr[mid] = arr[high];
+        arr[high] = tmp;
+        pivot = arr[high];
+        low--;
+        do {
+            while (arr[++low] < pivot)
+                ;
+            while ((low < high) && (arr[--high] > pivot))
+                ;
+            tmp = arr[low];
+            arr[low] = arr[high];
+            arr[high] = tmp;
+        } while (low < high);
+        tmp = arr[low];
+        arr[low] = arr[max];
+        arr[max] = tmp;
+        return low;
     }
 
     /** Print a given array of integers
