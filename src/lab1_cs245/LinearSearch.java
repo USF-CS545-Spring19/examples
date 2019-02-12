@@ -10,10 +10,13 @@ public class LinearSearch {
      * @return index of the element, if found; -1 otherwise
      */
     public static int search(String[] arr, String elem) {
-        // FILL IN CODE
-
-        return -1; // change if needed
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i].compareTo(elem) == 0)
+                return i;
+        }
+        return -1;
     }
+
 
     /**
      *
@@ -23,8 +26,11 @@ public class LinearSearch {
      * @return index of the element in the array, if found. -1 if not found.
      */
     public static int recursiveSearch(String[] arr, int i, String elem) {
-        // FILL IN CODE
-
-        return -1; // change if needed
+        if (i == arr.length)
+            return -1;
+        if (arr[i].compareTo(elem) == 0)
+            return i;
+        else
+            return recursiveSearch(arr, i+1, elem);
     }
 }
