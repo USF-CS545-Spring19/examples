@@ -9,6 +9,7 @@ public class SearchDriver {
 
         // Run linear search and print the result
         // FILL IN CODE
+        System.out.println("linear search is " + LinearSearch.search(arr,"car"));
 
         // Run recursive linear search and print the result
         // FILL IN CODE
@@ -20,7 +21,9 @@ public class SearchDriver {
         Comparable [] arrSorted = {"app", "bin", "cat", "cot", "crate", "dim", "dome", "elf", "nose", "sam", "seam"};
         // Run binary search and print the result
         // FILL IN CODE
-
+        System.out.println("search 1 is" + BinarySearch.search2(arrSorted,"app"));
+        System.out.println("search 2 is " + BinarySearch.search2(arrSorted,"app"));
+        System.out.println("search recursively is " + BinarySearch.searchRecursive(arrSorted,"app", 0, 10));
 
         // Run recursive binary search and print the result
         // FILL IN CODE
