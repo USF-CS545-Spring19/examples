@@ -10,7 +10,7 @@ public class SortingDriver {
         System.out.println("Input array: " + Arrays.toString(arr));
         Scanner sc = new Scanner(System.in);
         System.out.println("Which sorting algorithm you'd like to sort it with? ");
-        System.out.println("Type one of the following: selection, bubble, insertion, shell, merge");
+        System.out.println("Type one of the following: selection, bubble, insertion, shell, merge, quickSort");
 
         String input = sc.nextLine();
         if (input.equals("selection"))
