@@ -212,6 +212,7 @@ public class ArrayList implements List {
                 System.out.println("Iterator not in list");
                 return;
             }
+
             // shift elements starting at index nextIndex to the right
             for (i = currentSize; i > nextIndex; i--)
                 data[i] = data[i - 1];
