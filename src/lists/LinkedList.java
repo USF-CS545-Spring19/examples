@@ -103,31 +103,6 @@ public class LinkedList implements List {
 
 	}
 
-	public void removeNthFromEnd(int n) {
-		if (n <= 0)
-			return; // nothing to remove
-		Node first = head;
-		int count = 0;
-		while (count < n && first != null) {
-			first = first.next();
-			count++;
-		}
-		if (first == null) {
-			return; // no node to remove
-		}
-		//System.out.println(first.element());
-		// first one moved n times
-		// now both first and second move together
-		Node second = head;
-		while (first != tail) {
-			first = first.next();
-			second = second.next();
-		}
-		System.out.println(second.element());
-		// when first is null second is looking at nth node
-		// from the end
-		second.setNext(second.next().next());
-	}
 
 
 	/** Return the object at a given index
@@ -172,6 +147,11 @@ public class LinkedList implements List {
 	public ListIterator listIterator(int index) {
 		return new InnerIterator(index);
 	}
+
+	public Node head() {
+		return head;
+	}
+
 
 	/*----------------------------------------------------- */
 	/* Nested class -- Node */
@@ -322,5 +302,7 @@ public class LinkedList implements List {
 			length++;
 		}
 	}
+
+
 
 }
