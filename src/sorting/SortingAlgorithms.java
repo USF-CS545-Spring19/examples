@@ -1,5 +1,7 @@
 package sorting;
 
+import java.util.Arrays;
+
 /**
  * A class that contains static methods for sorting an array of integers using
  * various sorts */
@@ -71,9 +73,13 @@ public class SortingAlgorithms {
     public static void shellSort(int[] arr) {
         int n = arr.length;
         int increment, offset;
-        for (increment = n / 2; increment > 0; increment = increment / 2)
+        for (increment = n / 2; increment > 0; increment = increment / 2) {
             for (offset = 0; offset < increment; offset++)
                 insertionSort(arr, offset, increment);
+            for (int k = 0; k < arr.length; k++)
+                System.out.print(arr[k] + " ");
+            System.out.println();
+        }
     }
 
     /**
@@ -125,6 +131,7 @@ public class SortingAlgorithms {
 
         merge(arr, temp, low, mid, high); // merge two sorted halves into one
         // sorted list
+        print(arr);
 
     }
 
@@ -185,6 +192,8 @@ public class SortingAlgorithms {
         int indexOfPivot;
         if (low <= high) {
             indexOfPivot = partition(arr, low, high); // the index of pivot element
+            System.out.println("Pivot: " + arr[indexOfPivot]);
+            print(arr);
             quickSort(arr, low, indexOfPivot - 1);
             quickSort(arr, indexOfPivot + 1, high);
         }
@@ -272,8 +281,12 @@ public class SortingAlgorithms {
                 temp[--count[(arr[j].key() / place) % 10]] = arr[j];
 
             // copy the result back into arr
-            for (int j = 0; j < arr.length; j++)
+            for (int j = 0; j < arr.length; j++) {
                 arr[j] = temp[j];
+                System.out.print(arr[j].key() + " " );
+            }
+            System.out.println();
+
         }
     }
 
