@@ -155,9 +155,9 @@ class BinarySearchTree {
             System.out.print(" " + tree.data + " ");
             printPreorder(tree.left);
             printPreorder(tree.right);
-        }
-        else
+        } else
             System.out.print("/");
     }
+
 
 }
